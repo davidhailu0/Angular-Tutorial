@@ -1,0 +1,24 @@
+<div class="column wrapper gap-1">
+  <img [src]="product.image" alt="{{ product.name }}" />
+  <h2 class="title">{{ product.name }}</h2>
+  <div class="row gap-05">
+    <span class="price-label">Price:</span>
+    <span>{{ product.price }}</span>
+  </div>
+  <p-rating [(ngModel)]="product.rating" [readonly]="true" [cancel]="false" />
+  <div class="row space-between">
+    <button pButton (click)="selectProduct(product)" class="p-button-success">
+      Edit
+    </button>
+    <button
+      pButton
+      (click)="deleteProduct(product)"
+      class="p-button-danger"
+      #deleteButton
+    >
+      Delete
+    </button>
+  </div>
+</div>
+
+<p-confirmPopup></p-confirmPopup>
