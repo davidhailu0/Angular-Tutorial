@@ -5,20 +5,24 @@
   [style]="{ width: '25rem' }"
   [closable]="false"
 >
-  <div class="column gap-1">
+  <div class="column gap-1" [formGroup]="productForm">
     <div class="row gap-05">
       <span class="price-label">Name</span>
-      <input type="text" [(ngModel)]="product.name" />
+      <input type="text" formControlName="name" />
     </div>
     <div class="row gap-05">
       <span class="price-label">Price</span>
-      <input type="text" [(ngModel)]="product.price" />
+      <input type="text" formControlName="price" />
     </div>
     <div class="row gap-05">
       <span class="price-label">Image</span>
-      <input type="text" [(ngModel)]="product.image" />
+      <input type="text" formControlName="image" />
     </div>
-    <p-rating [(ngModel)]="product.rating" [cancel]="false" />
+    <p-rating
+      [(ngModel)]="product.rating"
+      [cancel]="false"
+      [ngModelOptions]="{ standalone: true }"
+    />
   </div>
   <p-footer>
     <button
@@ -27,6 +31,7 @@
       class="pi-button-success"
       (click)="onConfirm()"
       label="Confirm"
+      [class.disabled]="!productForm.valid"
     ></button>
     <button pButton type="button" (click)="onCancel()" label="Cancel"></button>
   </p-footer>

@@ -1,0 +1,8 @@
+input.ng-invalid {
+  border: 1px solid red;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

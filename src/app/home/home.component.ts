@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product, Products } from '../../types';
 import { ProductComponent } from '../components/product/product.component';
-import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { Paginator, PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { CommonModule } from '@angular/common';
 import { EditPopupComponent } from '../components/edit-popup/edit-popup.component';
 import { ButtonModule } from 'primeng/button';
@@ -22,7 +22,7 @@ import { ButtonModule } from 'primeng/button';
 })
 export class HomeComponent {
   constructor(private productService: ProductService) {}
-
+  @ViewChild('paginator') paginator: Paginator | undefined;
   products: Product[] = [];
   total: number = 0;
   rows: number = 5;
@@ -37,12 +37,21 @@ export class HomeComponent {
     rating: '',
   };
 
+  resetPage() {
+    this.paginator?.changePage(0);
+  }
+
   editClicked(product: Product) {
     this.selectedProduct = product;
     this.editPopupVisible = true;
   }
   addProductClicked() {
-    console.log(this.addPopup);
+    this.selectedProduct = {
+      name: '',
+      image: '',
+      price: '',
+      rating: '',
+    };
     this.addPopup = true;
   }
 
@@ -50,6 +59,7 @@ export class HomeComponent {
     if (!product.id) {
       return;
     }
+    this.resetPage();
     this.deleteProduct(product.id);
   }
 
@@ -58,6 +68,7 @@ export class HomeComponent {
     if (!this.selectedProduct.id) {
       return;
     }
+    this.resetPage();
     this.editProduct(product, this.selectedProduct.id);
   }
 

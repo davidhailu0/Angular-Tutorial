@@ -50,6 +50,14 @@ app-root {
   margin: bottom 25px;
 }
 
+a {
+  text-decoration: none;
+  font-weight: 300;
+  &.active {
+    font-weight: 900;
+  }
+}
+
 .wrap {
   flex-wrap: wrap;
 }

@@ -2,12 +2,17 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'truncate',
-  standalone: true
+  standalone: true,
 })
 export class TruncatePipe implements PipeTransform {
-
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(
+    value: string,
+    maxLength: number = 16,
+    ellipsis: string = '...'
+  ): string {
+    if (value.length > maxLength) {
+      return value.slice(0, maxLength) + ellipsis;
+    }
+    return value;
   }
-
 }
